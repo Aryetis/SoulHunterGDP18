@@ -88,6 +88,7 @@ public class PlayerController : MonoBehaviour {
 
                         if (sphereDeathCollider[i].tag == "PNJ")
                         {
+                            
                             Destroy(sphereDeathCollider[i].gameObject);
                         }
                     }

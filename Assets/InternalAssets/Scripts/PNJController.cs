@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PNJController : MonoBehaviour {
    
-
+    
     public GameObject soul;
 	// Use this for initialization
 	void Start () {
