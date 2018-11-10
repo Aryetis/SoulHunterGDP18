@@ -1234,7 +1234,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1481294677}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.56, y: 2.67, z: 0}
+  m_LocalPosition: {x: -0.58, y: 2.67, z: -0.77}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1061429530}
@@ -1256,6 +1256,9 @@ MonoBehaviour:
   playerNum: 0
   score: 0
   gatheredSouls: 0
+  isStunned: 0
+  stunTimeLeft: 0
+  stunTime: 0
 --- !u!1001 &1616740695
 Prefab:
   m_ObjectHideFlags: 0
@@ -1344,6 +1347,29 @@ Prefab:
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d4401072fdcd9414aac5fd3c32259c7b, type: 2}
   m_IsPrefabAsset: 0
+--- !u!1 &1729597929 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1563409595659308, guid: d4401072fdcd9414aac5fd3c32259c7b,
+    type: 2}
+  m_PrefabInternal: {fileID: 218946813}
+--- !u!95 &1729597934
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1729597929}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 10b44e12905e1df44a5aa8ae7bbc42c4, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1001 &2085956026
 Prefab:
   m_ObjectHideFlags: 0
