@@ -62,7 +62,7 @@ Debug.Log("setting controller number : " + i);
                     }
                 }
                 else
-                    SceneLoader.StaticLoadScene("InControlTestScenes");
+                    SceneLoader.StaticLoadScene("Level1_Blender");
             }
         }
     }
