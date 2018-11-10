@@ -7,13 +7,16 @@ public class PlayerMovementsBehavior : MonoBehaviour
     public float speed;
     public float dashSpeed;
     public float startDashTime;
-
+    public float dashCooldownTime;
+    
     private Rigidbody rb;
     private Collider playerCollider;
     private float dashTime;
     private bool IsDashing;
     private int playerId;
     private static int playerIdGenerator = 0; // TODO reset on scene load
+    private float dashCooldown;
+    private bool dashAllowed;
 
     // Use this for initialization
     void Start()
@@ -26,6 +29,8 @@ public class PlayerMovementsBehavior : MonoBehaviour
         playerCollider.enabled = true;
         playerId = playerIdGenerator;
         ++playerIdGenerator;
+        dashCooldown = 0;
+        dashAllowed = true;
     }
 
     // Update is called once per frame
@@ -33,8 +38,19 @@ public class PlayerMovementsBehavior : MonoBehaviour
     {
         Debug.Log("DashRequested : " + IsDashing);
         Debug.Log("dashTime : " + dashTime);
+        Debug.Log("dashCooldown : " + dashCooldown);
 
-        if (InputsManager.playerInputsDictionary[playerId].Dash && dashTime == startDashTime)
+        if (!dashAllowed)
+        {
+            dashCooldown -= Time.fixedDeltaTime;
+            if (dashCooldown <= 0)
+            {
+                dashAllowed = true;
+                dashCooldown = dashCooldownTime;
+            }
+        }
+
+        if (InputsManager.playerInputsDictionary[playerId].DashPressed && dashTime == startDashTime && dashAllowed)
             IsDashing = true;
 
         if (!IsDashing)
@@ -55,12 +71,14 @@ public class PlayerMovementsBehavior : MonoBehaviour
                 rb.velocity = ((Vector3.forward * InputsManager.playerInputsDictionary[playerId].LeftAnalogForwardAxis
                          + Vector3.right * InputsManager.playerInputsDictionary[playerId].LeftAnalogStrafeAxis).normalized * dashSpeed
                          * Time.fixedDeltaTime);
+                dashAllowed = false;
             }
             else if (dashTime <= 0) // Dash is Over
             {
                 IsDashing = false;
                 playerCollider.enabled = true;
                 dashTime = startDashTime;
+                dashCooldown = dashCooldownTime;
                 return;
             }
 

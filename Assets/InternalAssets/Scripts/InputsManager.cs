@@ -60,7 +60,7 @@ public class InputsManager : MonoBehaviour
 
 public class InputTable
 {
-    private static bool INPUTS_TABLE_DEBUG = true;
+    private static bool INPUTS_TABLE_DEBUG = false;
 
     public int controllerId;
 
@@ -68,8 +68,10 @@ public class InputTable
     public float LeftAnalogStrafeAxis; // Y Axis && buttons
     public float RightAnalogXAxis;
     public float RightAnalogYAxis;
-    public bool Dash;
-    public bool Pause;
+    public bool DashDown;
+    public bool DashPressed;
+    public bool PauseDown;
+    public bool PausePressed;
 
     private InControl.InputDevice inControlDevice;
 
@@ -96,9 +98,14 @@ public class InputTable
             RightAnalogXAxis = inControlDevice.GetControl(InControl.InputControlType.RightStickX).RawValue;
             RightAnalogYAxis = inControlDevice.GetControl(InControl.InputControlType.RightStickY).RawValue;
 
-            Dash = (inControlDevice.GetControl(InControl.InputControlType.LeftBumper).RawValue > 0.0f)
-                || (inControlDevice.GetControl(InControl.InputControlType.RightBumper).RawValue > 0.0f);
-            Pause = inControlDevice.GetControl(InControl.InputControlType.Command).RawValue > 0.0f;
+            DashDown = (inControlDevice.GetControl(InControl.InputControlType.LeftBumper).IsPressed)
+                || (inControlDevice.GetControl(InControl.InputControlType.RightBumper).IsPressed);
+
+            DashPressed = (inControlDevice.GetControl(InControl.InputControlType.LeftBumper).WasPressed)
+                || (inControlDevice.GetControl(InControl.InputControlType.RightBumper).WasPressed);
+
+            PauseDown = inControlDevice.GetControl(InControl.InputControlType.Command).IsPressed;
+            PausePressed = inControlDevice.GetControl(InControl.InputControlType.Command).WasPressed;
 
             if (INPUTS_TABLE_DEBUG)
             {
