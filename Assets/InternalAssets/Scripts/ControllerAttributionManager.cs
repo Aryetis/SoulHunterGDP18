@@ -6,6 +6,8 @@ using InControl;
 
 public class ControllerAttributionManager : MonoBehaviour
 {
+    private bool CONTROLLERATTRIBUTIONMANAGER_DEBUG = true;
+
     private GameObject[] playersStatusGO = new GameObject[3];
     private GameObject[] playersPressStartGO = new GameObject[3];
     private int currentPlayerAttribution;
@@ -37,7 +39,10 @@ public class ControllerAttributionManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        for(int i = 0 ; i < InputManager.Devices.Count;  ++i)
+        if(CONTROLLERATTRIBUTIONMANAGER_DEBUG && Input.GetKey(KeyCode.Space))
+            SceneLoader.StaticLoadScene("InControlTestScenes");
+
+        for (int i = 0 ; i < InputManager.Devices.Count; ++i)
         {
             if (InputManager.Devices[i].CommandIsPressed)
             {
@@ -45,8 +50,10 @@ public class ControllerAttributionManager : MonoBehaviour
                 {
                     if (!InputsManager.IsControllerIdUsed(i))
                     {
-                        Debug.Log("setting controller number : " + i);
-                        InputsManager.SetControllerIdToPlayer(i, currentPlayerAttribution);
+Debug.Log("setting controller number : " + i);
+                        if (!InputsManager.playerInputsDictionary.ContainsKey(currentPlayerAttribution))
+                            InputsManager.playerInputsDictionary[currentPlayerAttribution] = new InputTable();
+                        InputsManager.playerInputsDictionary[currentPlayerAttribution].SetControllerId(i);
                         ++currentPlayerAttribution;
                         playersPressStartGO[currentPlayerAttribution - 1].SetActive(false);
                         if (currentPlayerAttribution <= 2)
@@ -55,7 +62,7 @@ public class ControllerAttributionManager : MonoBehaviour
                     }
                 }
                 else
-                    SceneLoader.StaticLoadScene("MainScene");
+                    SceneLoader.StaticLoadScene("InControlTestScenes");
             }
         }
     }
