@@ -2,9 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DeathSphereBehavior : MonoBehaviour {
+public class DeathSphereBehavior : MonoBehaviour
+{
 
     public int playerNum;
+    public int score;
+    public int gatheredSouls;
+    public bool isStunned;
+    public float stunTimeLeft;
+    public float stunTime;
 
     private float sphereLoadingTime;
     private float maxSphereLoadingTime;
@@ -12,20 +18,13 @@ public class DeathSphereBehavior : MonoBehaviour {
     private float maxSphereDeathCooldownTime;
     private float sphereDeathCooldown;
     private float speed;
-
     private GameObject deathSphere;
     private Vector3 initalDeathSphereScale;
+    private PlayerMovementsBehavior pmb;
+    private PlayerIdDistributor pid;
 
-    public int score;
-    public int gatheredSouls;
-
-    public bool isStunned;
-    public float stunTimeLeft;
-    public float stunTime;
-    PlayerMovementsBehavior pmb;
-
-	// Use this for initialization
-	void Start ()
+    // Use this for initialization
+    void Start()
     {
         playerNum = 1;
         maxSphereDeathCooldownTime = 0.5f;
@@ -40,21 +39,21 @@ public class DeathSphereBehavior : MonoBehaviour {
         stunTime = 0f;
 
         pmb = GetComponent<PlayerMovementsBehavior>();
+        pid = GetComponent<PlayerIdDistributor>();
 
-        deathSphere = transform.GetChild(0).gameObject;
+        deathSphere = transform.Find("DeathSphere").gameObject;
         initalDeathSphereScale = deathSphere.transform.localScale;
-	}
-	
-	// Update is called once per frame
-	void Update ()
+    }
+
+    // Update is called once per frame
+    void Update()
     {
         if (!pmb.IsStunned)
         {
             //Managing the death sphere
             if (sphereDeathCooldown >= maxSphereDeathCooldownTime)
             {
-
-                if (Input.GetKey(KeyCode.Space) && sphereLoadingTime < maxSphereLoadingTime)
+                if (InputsManager.playerInputsDictionary[pid.PlayerId].AttackSphereDown && sphereLoadingTime < maxSphereLoadingTime)
                 {
                     //reducing speed while attacking
                     speed = 2.5f;
@@ -69,10 +68,8 @@ public class DeathSphereBehavior : MonoBehaviour {
                     Collider[] sphereDeathCollider = Physics.OverlapSphere(transform.position, deathSphere.GetComponent<SphereCollider>().radius * deathSphere.transform.localScale.x);
                     for (int i = 0; i < sphereDeathCollider.Length; i++)
                     {
-
                         if (sphereDeathCollider[i].tag == "PNJ")
                         {
-                            
                             Destroy(sphereDeathCollider[i].gameObject);
                         }
                     }
@@ -84,11 +81,8 @@ public class DeathSphereBehavior : MonoBehaviour {
                     sphereIsLoading = false;
                     sphereLoadingTime = 0f;
                     deathSphere.transform.localScale = initalDeathSphereScale;
-
-
                 }
             }
-
 
             //gestion du cooldown de la deathsphere
             if (sphereDeathCooldown <= maxSphereDeathCooldownTime)

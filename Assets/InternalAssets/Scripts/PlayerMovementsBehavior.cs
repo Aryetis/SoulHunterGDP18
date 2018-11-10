@@ -14,10 +14,9 @@ public class PlayerMovementsBehavior : MonoBehaviour
     private Collider playerCollider;
     private float dashTime;
     private bool IsDashing;
-    private int playerId;
-    private static int playerIdGenerator = 0; // TODO reset on scene load
     private float dashCooldown;
     private bool dashAllowed;
+    private PlayerIdDistributor pid;
 
     // Use this for initialization
     void Start()
@@ -28,11 +27,10 @@ public class PlayerMovementsBehavior : MonoBehaviour
         IsDashing = false;
         rb.velocity = Vector3.zero;
         playerCollider.enabled = true;
-        playerId = playerIdGenerator;
-        ++playerIdGenerator;
         dashCooldown = 0;
         dashAllowed = true;
         IsStunned = false;
+        pid = GetComponent<PlayerIdDistributor>();
     }
 
     // Update is called once per frame
@@ -52,7 +50,7 @@ public class PlayerMovementsBehavior : MonoBehaviour
             }
         }
 
-        if (InputsManager.playerInputsDictionary[playerId].DashPressed && dashTime == startDashTime && dashAllowed)
+        if (InputsManager.playerInputsDictionary[pid.PlayerId].DashPressed && dashTime == startDashTime && dashAllowed)
             IsDashing = true;
 
         if (!IsDashing)
@@ -61,8 +59,8 @@ public class PlayerMovementsBehavior : MonoBehaviour
             rb.drag = 0.0f;
 
             // Basic Movements
-            rb.velocity = (Vector3.forward * speed * InputsManager.playerInputsDictionary[playerId].LeftAnalogForwardAxis
-                         + Vector3.right * speed * InputsManager.playerInputsDictionary[playerId].LeftAnalogStrafeAxis) * Time.fixedDeltaTime;
+            rb.velocity = (Vector3.forward * speed * InputsManager.playerInputsDictionary[pid.PlayerId].LeftAnalogForwardAxis
+                         + Vector3.right * speed * InputsManager.playerInputsDictionary[pid.PlayerId].LeftAnalogStrafeAxis) * Time.fixedDeltaTime;
         }
         else if (IsDashing)
         {
@@ -70,8 +68,8 @@ public class PlayerMovementsBehavior : MonoBehaviour
             {
                 playerCollider.enabled = false;
 
-                rb.velocity = ((Vector3.forward * InputsManager.playerInputsDictionary[playerId].LeftAnalogForwardAxis
-                         + Vector3.right * InputsManager.playerInputsDictionary[playerId].LeftAnalogStrafeAxis).normalized * dashSpeed
+                rb.velocity = ((Vector3.forward * InputsManager.playerInputsDictionary[pid.PlayerId].LeftAnalogForwardAxis
+                         + Vector3.right * InputsManager.playerInputsDictionary[pid.PlayerId].LeftAnalogStrafeAxis).normalized * dashSpeed
                          * Time.fixedDeltaTime);
                 dashAllowed = false;
             }
