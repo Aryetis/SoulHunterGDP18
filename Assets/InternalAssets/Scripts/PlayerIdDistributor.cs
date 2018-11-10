@@ -8,6 +8,7 @@ public class PlayerIdDistributor : MonoBehaviour
 
     private int m_playerId;
     private static int playerIdGenerator = 0;
+    private static ScoreManager scoreManager = null;
 
     void OnEnable()
     {
@@ -19,5 +20,8 @@ public class PlayerIdDistributor : MonoBehaviour
     {
         m_playerId = playerIdGenerator;
         ++playerIdGenerator;
+        if (scoreManager == null)
+            scoreManager = GameObject.Find("ScoreManager").GetComponent<ScoreManager>();
+        scoreManager.RegisterPlayer(m_playerId);
     }
 }

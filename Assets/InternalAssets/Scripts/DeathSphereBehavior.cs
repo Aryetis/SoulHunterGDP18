@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class DeathSphereBehavior : MonoBehaviour
 {
-
     public int playerNum;
     public int score;
     public int gatheredSouls;
@@ -106,7 +105,6 @@ public class DeathSphereBehavior : MonoBehaviour
 
                 if (soulCatcherCollider[i].tag == "Base" + playerNum && gatheredSouls != 0)
                 {
-
                     score += gatheredSouls;
                     Debug.Log("Score : " + score);
                     gatheredSouls = 0;

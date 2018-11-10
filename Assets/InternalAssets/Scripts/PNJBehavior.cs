@@ -5,7 +5,10 @@ using UnityEngine.AI;
 
 public class PNJBehavior : MonoBehaviour
 {
-    public float targetTime = 3f;
+    [SerializeField]
+    private float targetTime = 3f;
+    [SerializeField]
+    private GameObject soul;
 
     private Vector3 positionDestination;
     private NavMeshAgent agent;
@@ -129,5 +132,11 @@ public class PNJBehavior : MonoBehaviour
         }
 
         return pointRandom;
+    }
+
+    private void OnDestroy()
+    {
+        soul.transform.position = transform.position;
+        Instantiate(soul);
     }
 }
