@@ -40,7 +40,7 @@ public class ControllerAttributionManager : MonoBehaviour
     void Update()
     {
         if(CONTROLLERATTRIBUTIONMANAGER_DEBUG && Input.GetKey(KeyCode.Space))
-            SceneLoader.StaticLoadScene("InControlTestScenes");
+            SceneLoader.StaticLoadScene("Level1_Blender");
 
         for (int i = 0 ; i < InputManager.Devices.Count; ++i)
         {

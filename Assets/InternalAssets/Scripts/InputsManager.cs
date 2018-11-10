@@ -72,6 +72,8 @@ public class InputTable
     public bool DashPressed;
     public bool PauseDown;
     public bool PausePressed;
+    public bool AttackSphereDown;
+    public bool AttackSpherePressed;
 
     private InControl.InputDevice inControlDevice;
 
@@ -98,14 +100,14 @@ public class InputTable
             RightAnalogXAxis = inControlDevice.GetControl(InControl.InputControlType.RightStickX).RawValue;
             RightAnalogYAxis = inControlDevice.GetControl(InControl.InputControlType.RightStickY).RawValue;
 
-            DashDown = (inControlDevice.GetControl(InControl.InputControlType.LeftBumper).IsPressed)
-                || (inControlDevice.GetControl(InControl.InputControlType.RightBumper).IsPressed);
-
-            DashPressed = (inControlDevice.GetControl(InControl.InputControlType.LeftBumper).WasPressed)
-                || (inControlDevice.GetControl(InControl.InputControlType.RightBumper).WasPressed);
+            DashDown = (inControlDevice.GetControl(InControl.InputControlType.RightBumper).IsPressed);
+            DashPressed = (inControlDevice.GetControl(InControl.InputControlType.RightBumper).WasPressed);
 
             PauseDown = inControlDevice.GetControl(InControl.InputControlType.Command).IsPressed;
             PausePressed = inControlDevice.GetControl(InControl.InputControlType.Command).WasPressed;
+
+            AttackSphereDown = (inControlDevice.GetControl(InControl.InputControlType.LeftBumper).IsPressed);
+            AttackSpherePressed = (inControlDevice.GetControl(InControl.InputControlType.LeftBumper).WasPressed);
 
             if (INPUTS_TABLE_DEBUG)
             {

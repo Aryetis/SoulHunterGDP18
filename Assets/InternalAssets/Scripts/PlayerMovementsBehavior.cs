@@ -8,7 +8,8 @@ public class PlayerMovementsBehavior : MonoBehaviour
     public float dashSpeed;
     public float startDashTime;
     public float dashCooldownTime;
-    
+    public bool IsStunned;
+
     private Rigidbody rb;
     private Collider playerCollider;
     private float dashTime;
@@ -31,6 +32,7 @@ public class PlayerMovementsBehavior : MonoBehaviour
         ++playerIdGenerator;
         dashCooldown = 0;
         dashAllowed = true;
+        IsStunned = false;
     }
 
     // Update is called once per frame

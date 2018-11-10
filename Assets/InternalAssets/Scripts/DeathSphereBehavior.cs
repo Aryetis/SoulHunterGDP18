@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour {
+public class DeathSphereBehavior : MonoBehaviour {
 
     public int playerNum;
 
@@ -22,10 +22,11 @@ public class PlayerController : MonoBehaviour {
     public bool isStunned;
     public float stunTimeLeft;
     public float stunTime;
-    
+    PlayerMovementsBehavior pmb;
 
 	// Use this for initialization
-	void Start () {
+	void Start ()
+    {
         playerNum = 1;
         maxSphereDeathCooldownTime = 0.5f;
         sphereDeathCooldown = 0f;
@@ -37,41 +38,24 @@ public class PlayerController : MonoBehaviour {
         isStunned = false;
         stunTime = 0.5f;
         stunTime = 0f;
-        
+
+        pmb = GetComponent<PlayerMovementsBehavior>();
 
         deathSphere = transform.GetChild(0).gameObject;
         initalDeathSphereScale = deathSphere.transform.localScale;
 	}
 	
 	// Update is called once per frame
-	void Update () {
-
-        if (!isStunned)
+	void Update ()
+    {
+        if (!pmb.IsStunned)
         {
-
-
-
-            if (Input.GetKey(KeyCode.UpArrow))
-                transform.position += new Vector3(0, 0, 1) * Time.deltaTime * speed;
-
-            if (Input.GetKey(KeyCode.DownArrow))
-                transform.position -= new Vector3(0, 0, 1) * Time.deltaTime * speed;
-
-            if (Input.GetKey(KeyCode.RightArrow))
-                transform.position += new Vector3(1, 0, 0) * Time.deltaTime * speed;
-
-            if (Input.GetKey(KeyCode.LeftArrow))
-                transform.position -= new Vector3(1, 0, 0) * Time.deltaTime * speed;
-
-
             //Managing the death sphere
             if (sphereDeathCooldown >= maxSphereDeathCooldownTime)
             {
 
                 if (Input.GetKey(KeyCode.Space) && sphereLoadingTime < maxSphereLoadingTime)
                 {
-
-
                     //reducing speed while attacking
                     speed = 2.5f;
 

@@ -23,4 +23,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/InternalAssets/Scenes/MainScene.unity
     guid: b09e1d2e7738d084bb0f1192e5d09ab6
+  - enabled: 1
+    path: Assets/InternalAssets/Scenes/Level1_Blender.unity
+    guid: 28455081fcacb4cffb466c065c6b2f4c
   m_configObjects: {}
