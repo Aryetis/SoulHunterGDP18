@@ -37,16 +37,15 @@ public class ReaperBehavior : MonoBehaviour
         if (!pmb.IsStunned)
         {
             // About to Attack
-            if (sphereDeathCooldown >= maxSphereDeathCooldownTime)
+            if (InputsManager.playerInputsDictionary[pid.PlayerId].AttackSphereDown 
+                && sphereDeathCooldown >= maxSphereDeathCooldownTime 
+                && sphereLoadingTime < maxSphereLoadingTime
+                && !pmb.IsAttacking)
             {
-
-                if (InputsManager.playerInputsDictionary[pid.PlayerId].AttackSphereDown && sphereLoadingTime < maxSphereLoadingTime)
-                {
-                    deathSphere.SetActive(true);
-                    pmb.IsAttacking = true; // pin down player while attacking (in PlayerMovementsBehavior.cs)
-                    deathSphere.transform.localScale += new Vector3(deathSphere.transform.localScale.x, deathSphere.transform.localScale.y, deathSphere.transform.localScale.z) * Time.deltaTime;
-                    sphereLoadingTime += Time.deltaTime;
-                }
+                deathSphere.SetActive(true);
+                pmb.IsAttacking = true; // pin down player while attacking (in PlayerMovementsBehavior.cs)
+                deathSphere.transform.localScale += new Vector3(deathSphere.transform.localScale.x, deathSphere.transform.localScale.y, deathSphere.transform.localScale.z) * Time.deltaTime;
+                sphereLoadingTime += Time.deltaTime;
             }
             // Attacking 
             else if (pmb.IsAttacking)
@@ -54,8 +53,9 @@ public class ReaperBehavior : MonoBehaviour
                 deathSphere.transform.localScale += new Vector3(deathSphere.transform.localScale.x, deathSphere.transform.localScale.y, deathSphere.transform.localScale.z) * Time.deltaTime;
                 sphereLoadingTime += Time.deltaTime;
             }
+
             // Releasing the attack
-            if (InputsManager.playerInputsDictionary[pid.PlayerId].AttackSphereReleased)
+            if (InputsManager.playerInputsDictionary[pid.PlayerId].AttackSphereReleased || sphereLoadingTime >= maxSphereLoadingTime)
             {
                 //getting PNJs in the death sphere area before killing them
                 Collider[] sphereDeathCollider = Physics.OverlapSphere(transform.position, deathSphere.GetComponent<SphereCollider>().radius * deathSphere.transform.localScale.x);
@@ -67,12 +67,7 @@ public class ReaperBehavior : MonoBehaviour
                     }
                 }
 
-                //reseting values
-                deathSphere.SetActive(false);
-                pmb.IsAttacking = false;
-                sphereDeathCooldown = 0;
-                sphereLoadingTime = 0f;
-                deathSphere.transform.localScale = initalDeathSphereScale;
+                ResetSphere();
             }
             
             //gestion du cooldown de la deathsphere
@@ -85,6 +80,19 @@ public class ReaperBehavior : MonoBehaviour
                 sphereDeathCooldown = maxSphereDeathCooldownTime;
             }
         }
+        else
+        {
+            ResetSphere();
+        }
+    }
+
+    private void ResetSphere()
+    {
+        deathSphere.SetActive(false);
+        pmb.IsAttacking = false;
+        sphereDeathCooldown = 0;
+        sphereLoadingTime = 0f;
+        deathSphere.transform.localScale = initalDeathSphereScale;
     }
 
     public void OnCollisionEnter(Collision collision)

@@ -41,7 +41,7 @@ public class PlayerMovementsBehavior : MonoBehaviour
         Debug.Log("dashTime : " + dashTime);
         Debug.Log("dashCooldown : " + dashCooldown);
 
-        if (!dashAllowed || IsStunned || IsAttacking )
+        if (!dashAllowed) // KEEP IT FIRST TO DECREASE TIMER EVEN WHEN STUNNED / ATTACKING
         {
             dashCooldown -= Time.fixedDeltaTime;
             if (dashCooldown <= 0)
@@ -49,6 +49,12 @@ public class PlayerMovementsBehavior : MonoBehaviour
                 dashAllowed = true;
                 dashCooldown = dashCooldownTime;
             }
+        }
+
+        if (IsStunned || IsAttacking)
+        {
+            rb.velocity = Vector3.zero;
+            return;
         }
 
         if (InputsManager.playerInputsDictionary[pid.PlayerId].DashPressed && dashTime == startDashTime && dashAllowed)
