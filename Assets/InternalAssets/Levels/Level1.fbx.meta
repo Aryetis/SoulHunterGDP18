@@ -64,6 +64,15 @@ ModelImporter:
     100116: Plane
     100118: Plane.001
     100120: Plane.002
+    100122: heater
+    100124: heater.001
+    100126: heater.002
+    100128: heater.003
+    100130: heater.004
+    100132: heater.005
+    100134: heater.006
+    100136: heater.007
+    100138: heater.008
     400000: Camera
     400002: Cube
     400004: Lamp
@@ -125,6 +134,15 @@ ModelImporter:
     400116: Plane
     400118: Plane.001
     400120: Plane.002
+    400122: heater
+    400124: heater.001
+    400126: heater.002
+    400128: heater.003
+    400130: heater.004
+    400132: heater.005
+    400134: heater.006
+    400136: heater.007
+    400138: heater.008
     2000000: Camera
     2100000: Material
     2100002: No Name
@@ -136,6 +154,91 @@ ModelImporter:
     2100014: Material.003
     2100016: Material.002
     2100018: Material.001
+    2100020: Material.087
+    2100022: Black
+    2100024: Material.010
+    2100026: Material.006
+    2100028: Material.007
+    2100030: Material.004
+    2100032: Material.005
+    2100034: Material.008
+    2100036: Material.009
+    2100038: Material.080
+    2100040: Material.082
+    2100042: Material.044
+    2100044: Material.083
+    2100046: Material.081
+    2100048: Material.079
+    2100050: Material.011
+    2100052: Material.014
+    2100054: Material.015
+    2100056: Material.051
+    2100058: Material.085
+    2100060: Material.086
+    2100062: Material.050
+    2100064: Material.084
+    2100066: Material.049
+    2100068: Material.045
+    2100070: Material.065
+    2100072: Material.063
+    2100074: Material.046
+    2100076: Material.066
+    2100078: Material.048
+    2100080: Material.047
+    2100082: Material.064
+    2100084: Material.013
+    2100086: Material.017
+    2100088: Material.012
+    2100090: Material.016
+    2100092: Material.034
+    2100094: Material.070
+    2100096: Material.067
+    2100098: Material.031
+    2100100: Material.074
+    2100102: Material.028
+    2100104: Material.060
+    2100106: Material.039
+    2100108: Material.062
+    2100110: Material.042
+    2100112: Material.040
+    2100114: Material.036
+    2100116: Material.026
+    2100118: Material.072
+    2100120: Material.071
+    2100122: Material.032
+    2100124: Material.069
+    2100126: Material.030
+    2100128: Material.073
+    2100130: Material.027
+    2100132: Material.068
+    2100134: Material.029
+    2100136: Material.059
+    2100138: Material.038
+    2100140: Material.061
+    2100142: Material.043
+    2100144: Material.058
+    2100146: Material.037
+    2100148: Material.057
+    2100150: Material.035
+    2100152: Material.041
+    2100154: Material.056
+    2100156: Material.022
+    2100158: Material.075
+    2100160: Material.078
+    2100162: Material.023
+    2100164: Material.025
+    2100166: Material.076
+    2100168: Material.077
+    2100170: Material.024
+    2100172: Material.054
+    2100174: Material.020
+    2100176: Material.055
+    2100178: Material.021
+    2100180: Material.052
+    2100182: Material.019
+    2100184: Material.018
+    2100186: Material.053
+    2100188: Material.088
     2300000: Cube
     2300002: //RootNode
     2300004: Cube.001
@@ -195,6 +298,15 @@ ModelImporter:
     2300112: Plane
     2300114: Plane.001
     2300116: Plane.002
+    2300118: heater
+    2300120: heater.001
+    2300122: heater.002
+    2300124: heater.003
+    2300126: heater.004
+    2300128: heater.005
+    2300130: heater.006
+    2300132: heater.007
+    2300134: heater.008
     3300000: Cube
     3300002: //RootNode
     3300004: Cube.001
@@ -254,6 +366,15 @@ ModelImporter:
     3300112: Plane
     3300114: Plane.001
     3300116: Plane.002
+    3300118: heater
+    3300120: heater.001
+    3300122: heater.002
+    3300124: heater.003
+    3300126: heater.004
+    3300128: heater.005
+    3300130: heater.006
+    3300132: heater.007
+    3300134: heater.008
     4300000: Cube
     4300002: Cube.002
     4300004: Cube.001
@@ -312,6 +433,15 @@ ModelImporter:
     4300110: Plane.002
     4300112: Plane.001
     4300114: Plane
+    4300116: heater.008
+    4300118: heater.007
+    4300120: heater.006
+    4300122: heater.005
+    4300124: heater.004
+    4300126: heater.003
+    4300128: heater.002
+    4300130: heater.001
+    4300132: heater
     10800000: Lamp
   externalObjects: {}
   materials:
