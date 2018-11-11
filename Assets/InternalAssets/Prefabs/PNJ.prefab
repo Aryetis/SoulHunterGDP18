@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4169815964944208}
   - component: {fileID: 33719749116860688}
   - component: {fileID: 23064382174746730}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -38,7 +38,7 @@ GameObject:
   - component: {fileID: 4536801807680928}
   - component: {fileID: 33137486588270422}
   - component: {fileID: 23743788496856140}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -55,7 +55,7 @@ GameObject:
   - component: {fileID: 4508589507728768}
   - component: {fileID: 33454080729307182}
   - component: {fileID: 23021217190415734}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -72,7 +72,7 @@ GameObject:
   - component: {fileID: 4446741919078274}
   - component: {fileID: 33871374201627534}
   - component: {fileID: 23530406855319078}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Cube (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -91,7 +91,7 @@ GameObject:
   - component: {fileID: 54105818042608624}
   - component: {fileID: 114400431432772882}
   - component: {fileID: 195987132802838874}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: PNJ
   m_TagString: PNJ
   m_Icon: {fileID: 0}
@@ -108,7 +108,7 @@ GameObject:
   - component: {fileID: 4696241629422798}
   - component: {fileID: 33940747586053614}
   - component: {fileID: 23272106464813004}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Cube (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -125,7 +125,7 @@ GameObject:
   - component: {fileID: 4151492084051500}
   - component: {fileID: 33662412838828710}
   - component: {fileID: 23924730904305176}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Cylinder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -508,7 +508,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetTime: 3
-  soul: {fileID: 1591927739452934, guid: d67a67a4b60e58340947a8e476acc5bf, type: 2}
 --- !u!136 &136017750764084168
 CapsuleCollider:
   m_ObjectHideFlags: 1

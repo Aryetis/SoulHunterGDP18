@@ -18,6 +18,10 @@ public class PlayerMovementsBehavior : MonoBehaviour
     private float dashCooldown;
     private bool dashAllowed;
     private PlayerIdDistributor pid;
+    private int innerWallLayerId;
+    private int pnjLayerId;
+    private int playerLayerId;
+    private bool PLAYERMOVEMENT_DEBUG = false;
 
     // Use this for initialization
     void Start()
@@ -27,7 +31,11 @@ public class PlayerMovementsBehavior : MonoBehaviour
         dashTime = startDashTime;
         IsDashing = false;
         rb.velocity = Vector3.zero;
-        playerCollider.enabled = true;
+        innerWallLayerId = LayerMask.NameToLayer("InnerWalls");
+        playerLayerId = LayerMask.NameToLayer("Players");
+        pnjLayerId = LayerMask.NameToLayer("PNJ");
+        SetInnerLayerCollision(false);
+        Physics.IgnoreLayerCollision(pnjLayerId, playerLayerId, true);
         dashCooldown = 0;
         dashAllowed = true;
         IsStunned = false;
@@ -37,11 +45,17 @@ public class PlayerMovementsBehavior : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        Debug.Log("DashRequested : " + IsDashing);
-        Debug.Log("dashTime : " + dashTime);
-        Debug.Log("dashCooldown : " + dashCooldown);
+        if (PLAYERMOVEMENT_DEBUG)
+        {
+            //Debug.Log("DashRequested : " + IsDashing);
+            //Debug.Log("dashTime : " + dashTime);
+            //Debug.Log("dashCooldown : " + dashCooldown);
+            //Debug.Log("pid.PlayerId : " + pid.PlayerId);
+            //if (InputsManager.playerInputsDictionary[pid.PlayerId] == null)
+            //    Debug.Log("InputTable not available for player " + pid.PlayerId);
+        }
 
-        if (!dashAllowed || IsStunned || IsAttacking )
+        if (!dashAllowed) // KEEP IT FIRST TO DECREASE TIMER EVEN WHEN STUNNED / ATTACKING
         {
             dashCooldown -= Time.fixedDeltaTime;
             if (dashCooldown <= 0)
@@ -49,6 +63,12 @@ public class PlayerMovementsBehavior : MonoBehaviour
                 dashAllowed = true;
                 dashCooldown = dashCooldownTime;
             }
+        }
+
+        if (IsStunned || IsAttacking)
+        {
+            rb.velocity = Vector3.zero;
+            return;
         }
 
         if (InputsManager.playerInputsDictionary[pid.PlayerId].DashPressed && dashTime == startDashTime && dashAllowed)
@@ -67,7 +87,7 @@ public class PlayerMovementsBehavior : MonoBehaviour
         {
             if (dashTime == startDashTime) // Give impulse
             {
-                playerCollider.enabled = false;
+                SetInnerLayerCollision(true);
 
                 rb.velocity = ((Vector3.forward * InputsManager.playerInputsDictionary[pid.PlayerId].LeftAnalogForwardAxis
                          + Vector3.right * InputsManager.playerInputsDictionary[pid.PlayerId].LeftAnalogStrafeAxis).normalized * dashSpeed
@@ -77,7 +97,7 @@ public class PlayerMovementsBehavior : MonoBehaviour
             else if (dashTime <= 0) // Dash is Over
             {
                 IsDashing = false;
-                playerCollider.enabled = true;
+                SetInnerLayerCollision(false);
                 dashTime = startDashTime;
                 dashCooldown = dashCooldownTime;
                 return;
@@ -96,6 +116,13 @@ public class PlayerMovementsBehavior : MonoBehaviour
     private void UnStun()
     {
         IsStunned = false;
+    }
+
+    private void SetInnerLayerCollision(bool b)
+    {
+        if (PLAYERMOVEMENT_DEBUG)
+            Debug.Log("Turning " + (b ? "On" : "Off")+ "innerWalls collisions");
+        Physics.IgnoreLayerCollision(innerWallLayerId, playerLayerId, b);
     }
 }
 

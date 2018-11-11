@@ -5,14 +5,16 @@ using UnityEngine.AI;
 
 public class PNJSpawner : MonoBehaviour
 {
+    public static int PnjSpawned { get { return pnjNumberStatic; } }
     [SerializeField]
     private int pnjNumber = 30;
-    [SerializeField]
-    private GameObject pnjPrefab;
+    private static int pnjNumberStatic;
+    public GameObject pnjPrefab;
     private NavMeshTriangulation navMeshData;
     
     void Start ()
     {
+        pnjNumberStatic = pnjNumber;
         navMeshData = NavMesh.CalculateTriangulation();
 
         for (int i=0; i<pnjNumber; ++i)
