@@ -53,27 +53,27 @@ public class ReaperBehavior : MonoBehaviour
             {
                 deathSphere.transform.localScale += new Vector3(deathSphere.transform.localScale.x, deathSphere.transform.localScale.y, deathSphere.transform.localScale.z) * Time.deltaTime;
                 sphereLoadingTime += Time.deltaTime;
-            }
 
-            // Releasing the attack
-            if (InputsManager.playerInputsDictionary[pid.PlayerId].AttackSphereReleased || sphereLoadingTime >= maxSphereLoadingTime)
-            {
-                //getting PNJs in the death sphere area before killing them
-                Collider[] sphereDeathCollider = Physics.OverlapSphere(transform.position, deathSphere.GetComponent<SphereCollider>().radius * deathSphere.transform.localScale.x);
-                for (int i = 0; i < sphereDeathCollider.Length; ++i)
+                // Releasing the attack
+                if (!InputsManager.playerInputsDictionary[pid.PlayerId].AttackSphereDown || sphereLoadingTime >= maxSphereLoadingTime)
                 {
-                    if (sphereDeathCollider[i].tag == "PNJ")
+                    //getting PNJs in the death sphere area before killing them
+                    Collider[] sphereDeathCollider = Physics.OverlapSphere(transform.position, deathSphere.GetComponent<SphereCollider>().radius * deathSphere.transform.localScale.x);
+                    for (int i = 0; i < sphereDeathCollider.Length; ++i)
                     {
-                        Vector3 victimPosition = sphereDeathCollider[i].gameObject.transform.position;
-                        // Destroy PNJ
-                        Destroy(sphereDeathCollider[i].gameObject);
-                        // Spawn Souls
-                        soul.transform.position = victimPosition;
-                        Instantiate(soul);
+                        if (sphereDeathCollider[i].tag == "PNJ")
+                        {
+                            Vector3 victimPosition = sphereDeathCollider[i].gameObject.transform.position;
+                            // Destroy PNJ
+                            Destroy(sphereDeathCollider[i].gameObject);
+                            // Spawn Souls
+                            soul.transform.position = victimPosition;
+                            Instantiate(soul);
+                        }
                     }
-                }
 
-                ResetSphere();
+                    ResetSphere();
+                }
             }
             
             //gestion du cooldown de la deathsphere

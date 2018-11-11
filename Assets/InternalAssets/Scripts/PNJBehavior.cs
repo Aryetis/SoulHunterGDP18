@@ -188,9 +188,9 @@ public class PNJBehavior : MonoBehaviour
         return pointRandom;
     }
 
-    private void OnDestroy()
-    {
-        soul.transform.position = transform.position;
-        Instantiate(soul);
-    }
+    //private void OnDestroy()
+    //{
+    //    soul.transform.position = transform.position;
+    //    Instantiate(soul);
+    //}
 }
