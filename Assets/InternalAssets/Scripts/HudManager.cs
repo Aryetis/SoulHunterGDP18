@@ -2,12 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class HudManager : MonoBehaviour
 {
+    [SerializeField]
+    private float HoldStartToGoBackTime;
+    private float holdingStartTimer;
+    public static bool IsGamePaused { get {return isGamePaused;} private set { isGamePaused = value; } }
+
     private const double V = 0.1;
     private static Slider[] scoreSliders;
-    private static bool HUD_MANAGER_DEBUG = false; 
+    private static bool HUD_MANAGER_DEBUG = false;
+    private static bool isGamePaused;
+    private static GameObject pauseTextGO;
 
     // Use this for initialization
     void Start()
@@ -26,6 +34,12 @@ public class HudManager : MonoBehaviour
         scoreSliders[1].value = 0;
         scoreSliders[2] = GameObject.Find("PlayersYellowCountSoul").GetComponent<Slider>();
         scoreSliders[2].value = 0;
+
+        pauseTextGO = GameObject.Find("PauseText");
+        pauseTextGO.SetActive(false);
+
+        IsGamePaused = false;
+        holdingStartTimer = 0.0f;
     }
 
     public static void IncrementScoreSliderValue(int player_id, float value_)
@@ -38,13 +52,34 @@ public class HudManager : MonoBehaviour
             scoreSliders[player_id].value += value_; 
     }
 
-    // Update is called once per frame
-    //void FixedUpdate()
-    //{
-    //    if (Input.GetKey(KeyCode.UpArrow))
-    //        slider.value += 0.100f;
-    //    if (Input.GetKey(KeyCode.DownArrow))
-    //        slider.value = 0;
-    //}
+    private void Update()
+    {
+        if (!IsGamePaused && InputsManager.AnyPauseButtonDown() )
+        {
+            Time.timeScale = 0.0f;
+            pauseTextGO.SetActive(true);
+            IsGamePaused = true;
+        }
+
+        if (IsGamePaused)
+        {
+            if (InputsManager.AnyPauseButtonDown())
+            {
+                holdingStartTimer += Time.unscaledDeltaTime;
+                if (holdingStartTimer >= HoldStartToGoBackTime)
+                {
+                    Time.timeScale = 1.0f;
+                    SceneManager.LoadScene("Menus");
+                }
+            }
+            else
+            {
+                holdingStartTimer = 0.0f;
+                Time.timeScale = 1.0f;
+                pauseTextGO.SetActive(false);
+                IsGamePaused = false;
+            }
+        }
+    }
 }
 

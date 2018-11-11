@@ -13,6 +13,8 @@ public class ScoreManager : MonoBehaviour
     private void Awake()
     {
         playerScores = new Dictionary<int, int>();
+        for (int i = 0; i < 3; ++i)
+            playerScores.Add(i, 0); // HACK
     }
 
     // Use this for initialization
@@ -20,14 +22,6 @@ public class ScoreManager : MonoBehaviour
     {
         VictoryScore = victoryScoreEditorVariable;
         sliderValuePerSoul = 1.0f / VictoryScore;
-        for (int i = 0; i < 3; ++i)
-            playerScores.Add(i, 0); // HACK
-    }
-
-    public static void RegisterPlayer(int m_playerId)
-    {
-        if (!playerScores.ContainsKey(m_playerId))
-            playerScores.Add(m_playerId, 0);
     }
 
     public static int GetPlayerScore(int m_playerId)

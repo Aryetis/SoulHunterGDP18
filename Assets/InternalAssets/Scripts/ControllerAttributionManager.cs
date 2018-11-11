@@ -26,6 +26,8 @@ public class ControllerAttributionManager : MonoBehaviour
 	// Use this for initialization
 	void Start ()
     {
+        InputsManager.ClearplayerInputsDictionary();
+
         currentPlayerAttribution = 0;
 
         playersStatusGO[0].SetActive(false);

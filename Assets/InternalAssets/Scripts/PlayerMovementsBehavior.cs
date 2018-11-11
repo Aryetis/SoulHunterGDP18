@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(AudioSource))]
 public class PlayerMovementsBehavior : MonoBehaviour
 {
     public float speed;
@@ -10,7 +11,7 @@ public class PlayerMovementsBehavior : MonoBehaviour
     public float dashCooldownTime;
     public bool IsStunned;
     public bool IsAttacking;
-    public AudioClip DashSound;
+    AudioSource audioSource;
 
     private Rigidbody rb;
     private Collider playerCollider;
@@ -41,6 +42,7 @@ public class PlayerMovementsBehavior : MonoBehaviour
         dashAllowed = true;
         IsStunned = false;
         pid = GetComponent<PlayerIdDistributor>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -73,7 +75,10 @@ public class PlayerMovementsBehavior : MonoBehaviour
         }
 
         if (InputsManager.playerInputsDictionary[pid.PlayerId].DashPressed && dashTime == startDashTime && dashAllowed)
+        {
             IsDashing = true;
+            audioSource.Play();
+        }
 
         if (!IsDashing)
         {
@@ -84,30 +89,30 @@ public class PlayerMovementsBehavior : MonoBehaviour
             rb.velocity = (Vector3.forward * speed * InputsManager.playerInputsDictionary[pid.PlayerId].LeftAnalogForwardAxis
                          + Vector3.right * speed * InputsManager.playerInputsDictionary[pid.PlayerId].LeftAnalogStrafeAxis) * Time.fixedDeltaTime;
 
-    }
+        }
         else if (IsDashing)
         {
             if (dashTime == startDashTime) // Give impulse
             {
                 IgnoreInnerWallsCollision(true);
 
-    rb.velocity = ((Vector3.forward* InputsManager.playerInputsDictionary[pid.PlayerId].LeftAnalogForwardAxis
-                         + Vector3.right* InputsManager.playerInputsDictionary[pid.PlayerId].LeftAnalogStrafeAxis).normalized* dashSpeed
-                         * Time.fixedDeltaTime);
+                rb.velocity = ((Vector3.forward * InputsManager.playerInputsDictionary[pid.PlayerId].LeftAnalogForwardAxis
+                                     + Vector3.right * InputsManager.playerInputsDictionary[pid.PlayerId].LeftAnalogStrafeAxis).normalized * dashSpeed
+                                     * Time.fixedDeltaTime);
                 dashAllowed = false;
             }
             else if (dashTime <= 0) // Dash is Over
             {
                 IsDashing = false;
                 IgnoreInnerWallsCollision(false);
-dashTime = startDashTime;
+                dashTime = startDashTime;
                 dashCooldown = dashCooldownTime;
                 return;
             }
 
             dashTime -= Time.fixedDeltaTime;
         }
-        
+
         // Face correct direction
         //transform.forward = (transform.position + rb.velocity);
         //transform.LookAt(transform.Find("Head").gameObject.GetComponent<Rigidbody>().+ rb.velocity);
@@ -127,7 +132,7 @@ dashTime = startDashTime;
     private void IgnoreInnerWallsCollision(bool b)
     {
         if (PLAYERMOVEMENT_DEBUG)
-            Debug.Log("Turning " + (b ? "On" : "Off")+ "innerWalls collisions");
+            Debug.Log("Turning " + (b ? "On" : "Off") + "innerWalls collisions");
         Physics.IgnoreLayerCollision(innerWallLayerId, playerLayerId, b);
     }
 }
