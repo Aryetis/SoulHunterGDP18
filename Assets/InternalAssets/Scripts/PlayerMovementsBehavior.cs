@@ -18,6 +18,7 @@ public class PlayerMovementsBehavior : MonoBehaviour
     private float dashCooldown;
     private bool dashAllowed;
     private PlayerIdDistributor pid;
+    private bool PLAYERMOVEMENT_DEBUG = false;
 
     // Use this for initialization
     void Start()
@@ -37,9 +38,15 @@ public class PlayerMovementsBehavior : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        Debug.Log("DashRequested : " + IsDashing);
-        Debug.Log("dashTime : " + dashTime);
-        Debug.Log("dashCooldown : " + dashCooldown);
+        if (PLAYERMOVEMENT_DEBUG)
+        {
+            Debug.Log("DashRequested : " + IsDashing);
+            Debug.Log("dashTime : " + dashTime);
+            Debug.Log("dashCooldown : " + dashCooldown);
+            Debug.Log("pid.PlayerId : " + pid.PlayerId);
+            if (InputsManager.playerInputsDictionary[pid.PlayerId] == null)
+                Debug.Log("InputTable not available for player " + pid.PlayerId);
+        }
 
         if (!dashAllowed) // KEEP IT FIRST TO DECREASE TIMER EVEN WHEN STUNNED / ATTACKING
         {

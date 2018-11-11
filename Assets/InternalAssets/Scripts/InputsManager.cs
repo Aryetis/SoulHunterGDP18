@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class InputsManager : MonoBehaviour
 {
-    private static bool INPUTS_MANAGER_DEBUG = false;
+    //private static bool INPUTS_MANAGER_DEBUG = false;
 
     static public Dictionary<int, InputTable> playerInputsDictionary;
     delegate void OnControllerDetached(int controllerID);

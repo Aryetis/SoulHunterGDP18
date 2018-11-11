@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerIdDistributor : MonoBehaviour
 {
@@ -9,7 +10,7 @@ public class PlayerIdDistributor : MonoBehaviour
     private int m_playerId;
     private static int playerIdGenerator = 0;
 
-    void OnEnable()
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         playerIdGenerator = 0;
     }

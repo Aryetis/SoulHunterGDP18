@@ -6,6 +6,7 @@ public class ReaperBehavior : MonoBehaviour
 {
     public int gatheredSouls; // must be public as it's modified by BaseBehavior
     public float maxSphereLoadingTime = 2f;
+    public GameObject soul;
 
     private float sphereLoadingTime;
     private float maxSphereDeathCooldownTime;
@@ -63,7 +64,12 @@ public class ReaperBehavior : MonoBehaviour
                 {
                     if (sphereDeathCollider[i].tag == "PNJ")
                     {
-                        Destroy(sphereDeathCollider[i].gameObject); // PNJ's OnDestroy will instantiate "Soul"
+                        Vector3 victimPosition = sphereDeathCollider[i].gameObject.transform.position;
+                        // Destroy PNJ
+                        Destroy(sphereDeathCollider[i].gameObject);
+                        // Spawn Souls
+                        soul.transform.position = victimPosition;
+                        Instantiate(soul);
                     }
                 }
 
