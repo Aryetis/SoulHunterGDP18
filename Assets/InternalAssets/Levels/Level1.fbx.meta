@@ -59,6 +59,11 @@ ModelImporter:
     100106: Cylinder
     100108: Cylinder.001
     100110: Cylinder.002
+    100112: Cube.000
+    100114: Floor
+    100116: Plane
+    100118: Plane.001
+    100120: Plane.002
     400000: Camera
     400002: Cube
     400004: Lamp
@@ -115,6 +120,11 @@ ModelImporter:
     400106: Cylinder
     400108: Cylinder.001
     400110: Cylinder.002
+    400112: Cube.000
+    400114: Floor
+    400116: Plane
+    400118: Plane.001
+    400120: Plane.002
     2000000: Camera
     2100000: Material
     2100002: No Name
@@ -123,6 +133,9 @@ ModelImporter:
     2100008: FlowerEarth
     2100010: Grey
     2100012: DeskTop
+    2100014: Material.003
+    2100016: Material.002
+    2100018: Material.001
     2300000: Cube
     2300002: //RootNode
     2300004: Cube.001
@@ -177,6 +190,11 @@ ModelImporter:
     2300102: Cylinder
     2300104: Cylinder.001
     2300106: Cylinder.002
+    2300108: Cube.000
+    2300110: Floor
+    2300112: Plane
+    2300114: Plane.001
+    2300116: Plane.002
     3300000: Cube
     3300002: //RootNode
     3300004: Cube.001
@@ -231,6 +249,11 @@ ModelImporter:
     3300102: Cylinder
     3300104: Cylinder.001
     3300106: Cylinder.002
+    3300108: Cube.000
+    3300110: Floor
+    3300112: Plane
+    3300114: Plane.001
+    3300116: Plane.002
     4300000: Cube
     4300002: Cube.002
     4300004: Cube.001
@@ -284,6 +307,11 @@ ModelImporter:
     4300100: Cube.022
     4300102: Cube.021
     4300104: Cube.020
+    4300106: Cube.000
+    4300108: Floor
+    4300110: Plane.002
+    4300112: Plane.001
+    4300114: Plane
     10800000: Lamp
   externalObjects: {}
   materials:
