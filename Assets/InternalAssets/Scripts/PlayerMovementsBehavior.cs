@@ -18,6 +18,8 @@ public class PlayerMovementsBehavior : MonoBehaviour
     private float dashCooldown;
     private bool dashAllowed;
     private PlayerIdDistributor pid;
+    private int usualColliderMask;
+    private int DontCollideWithInnerWallsMask;
     private bool PLAYERMOVEMENT_DEBUG = false;
 
     // Use this for initialization
@@ -28,6 +30,7 @@ public class PlayerMovementsBehavior : MonoBehaviour
         dashTime = startDashTime;
         IsDashing = false;
         rb.velocity = Vector3.zero;
+        //playerCollider.enabled = true;
         playerCollider.enabled = true;
         dashCooldown = 0;
         dashAllowed = true;
