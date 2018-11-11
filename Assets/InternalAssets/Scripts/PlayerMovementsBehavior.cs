@@ -83,15 +83,16 @@ public class PlayerMovementsBehavior : MonoBehaviour
             // Basic Movements
             rb.velocity = (Vector3.forward * speed * InputsManager.playerInputsDictionary[pid.PlayerId].LeftAnalogForwardAxis
                          + Vector3.right * speed * InputsManager.playerInputsDictionary[pid.PlayerId].LeftAnalogStrafeAxis) * Time.fixedDeltaTime;
-        }
+
+    }
         else if (IsDashing)
         {
             if (dashTime == startDashTime) // Give impulse
             {
                 IgnoreInnerWallsCollision(true);
 
-                rb.velocity = ((Vector3.forward * InputsManager.playerInputsDictionary[pid.PlayerId].LeftAnalogForwardAxis
-                         + Vector3.right * InputsManager.playerInputsDictionary[pid.PlayerId].LeftAnalogStrafeAxis).normalized * dashSpeed
+    rb.velocity = ((Vector3.forward* InputsManager.playerInputsDictionary[pid.PlayerId].LeftAnalogForwardAxis
+                         + Vector3.right* InputsManager.playerInputsDictionary[pid.PlayerId].LeftAnalogStrafeAxis).normalized* dashSpeed
                          * Time.fixedDeltaTime);
                 dashAllowed = false;
             }
@@ -99,7 +100,7 @@ public class PlayerMovementsBehavior : MonoBehaviour
             {
                 IsDashing = false;
                 IgnoreInnerWallsCollision(false);
-                dashTime = startDashTime;
+dashTime = startDashTime;
                 dashCooldown = dashCooldownTime;
                 return;
             }
