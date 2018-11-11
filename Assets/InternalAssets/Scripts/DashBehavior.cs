@@ -10,6 +10,9 @@ public class DashBehavior : MonoBehaviour
   public float startDashTime;
   private BoxCollider playerCollider;
 	private bool IsDdashing;
+  public GameObject dashEffect;
+
+
 
   // Use this for initialization
   void Start()
@@ -26,15 +29,19 @@ public class DashBehavior : MonoBehaviour
   {
     if (Input.GetKey(KeyCode.UpArrow))
       transform.position += new Vector3(0, 0, 1) * Time.deltaTime;
+      Instantiate(dashEffect, transform.position, Quaternion.identity);
 
     if (Input.GetKey(KeyCode.DownArrow))
       transform.position -= new Vector3(0, 0, 1) * Time.deltaTime;
+      Instantiate(dashEffect, transform.position, Quaternion.identity);
 
     if (Input.GetKey(KeyCode.RightArrow))
       transform.position += new Vector3(1, 0, 0) * Time.deltaTime;
+      Instantiate(dashEffect, transform.position, Quaternion.identity);
 
     if (Input.GetKey(KeyCode.LeftArrow))
       transform.position -= new Vector3(1, 0, 0) * Time.deltaTime;
+      Instantiate(dashEffect, transform.position, Quaternion.identity);
 
 		if (Input.GetKeyDown(KeyCode.Space) || dashTime <=0 )
 	     IsDdashing = true;
@@ -49,6 +56,7 @@ public class DashBehavior : MonoBehaviour
 				if (!IsDdashing)
 					rb.velocity = Vector3.zero;
           playerCollider.enabled = true;
+          // camAnim.SetTrigger("Shake");
 				
         dashTime -= Time.fixedDeltaTime;
 
