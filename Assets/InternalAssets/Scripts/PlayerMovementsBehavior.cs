@@ -18,8 +18,9 @@ public class PlayerMovementsBehavior : MonoBehaviour
     private float dashCooldown;
     private bool dashAllowed;
     private PlayerIdDistributor pid;
-    private int usualColliderMask;
-    private int DontCollideWithInnerWallsMask;
+    private int innerWallLayerId;
+    private int pnjLayerId;
+    private int playerLayerId;
     private bool PLAYERMOVEMENT_DEBUG = false;
 
     // Use this for initialization
@@ -30,8 +31,11 @@ public class PlayerMovementsBehavior : MonoBehaviour
         dashTime = startDashTime;
         IsDashing = false;
         rb.velocity = Vector3.zero;
-        //playerCollider.enabled = true;
-        playerCollider.enabled = true;
+        innerWallLayerId = LayerMask.NameToLayer("InnerWalls");
+        playerLayerId = LayerMask.NameToLayer("Players");
+        pnjLayerId = LayerMask.NameToLayer("PNJ");
+        SetInnerLayerCollision(false);
+        Physics.IgnoreLayerCollision(pnjLayerId, playerLayerId, true);
         dashCooldown = 0;
         dashAllowed = true;
         IsStunned = false;
@@ -43,12 +47,12 @@ public class PlayerMovementsBehavior : MonoBehaviour
     {
         if (PLAYERMOVEMENT_DEBUG)
         {
-            Debug.Log("DashRequested : " + IsDashing);
-            Debug.Log("dashTime : " + dashTime);
-            Debug.Log("dashCooldown : " + dashCooldown);
-            Debug.Log("pid.PlayerId : " + pid.PlayerId);
-            if (InputsManager.playerInputsDictionary[pid.PlayerId] == null)
-                Debug.Log("InputTable not available for player " + pid.PlayerId);
+            //Debug.Log("DashRequested : " + IsDashing);
+            //Debug.Log("dashTime : " + dashTime);
+            //Debug.Log("dashCooldown : " + dashCooldown);
+            //Debug.Log("pid.PlayerId : " + pid.PlayerId);
+            //if (InputsManager.playerInputsDictionary[pid.PlayerId] == null)
+            //    Debug.Log("InputTable not available for player " + pid.PlayerId);
         }
 
         if (!dashAllowed) // KEEP IT FIRST TO DECREASE TIMER EVEN WHEN STUNNED / ATTACKING
@@ -83,7 +87,7 @@ public class PlayerMovementsBehavior : MonoBehaviour
         {
             if (dashTime == startDashTime) // Give impulse
             {
-                playerCollider.enabled = false;
+                SetInnerLayerCollision(true);
 
                 rb.velocity = ((Vector3.forward * InputsManager.playerInputsDictionary[pid.PlayerId].LeftAnalogForwardAxis
                          + Vector3.right * InputsManager.playerInputsDictionary[pid.PlayerId].LeftAnalogStrafeAxis).normalized * dashSpeed
@@ -93,7 +97,7 @@ public class PlayerMovementsBehavior : MonoBehaviour
             else if (dashTime <= 0) // Dash is Over
             {
                 IsDashing = false;
-                playerCollider.enabled = true;
+                SetInnerLayerCollision(false);
                 dashTime = startDashTime;
                 dashCooldown = dashCooldownTime;
                 return;
@@ -112,6 +116,13 @@ public class PlayerMovementsBehavior : MonoBehaviour
     private void UnStun()
     {
         IsStunned = false;
+    }
+
+    private void SetInnerLayerCollision(bool b)
+    {
+        if (PLAYERMOVEMENT_DEBUG)
+            Debug.Log("Turning " + (b ? "On" : "Off")+ "innerWalls collisions");
+        Physics.IgnoreLayerCollision(innerWallLayerId, playerLayerId, b);
     }
 }
 
