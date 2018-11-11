@@ -32,7 +32,14 @@ public class MainMenuManager : MonoBehaviour
     {
         SceneLoader.StaticLoadScene("ControllerSelectionScene");
     }
-
+    public void LoadMenus()
+    {
+        SceneLoader.StaticLoadScene("Menus");
+    }
+    public void LoadCredits()
+    {
+        SceneLoader.StaticLoadScene("Credits");
+    }
     public void QuitGame()
     {
        #if UNITY_EDITOR 
