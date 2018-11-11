@@ -10,6 +10,7 @@ public class PlayerMovementsBehavior : MonoBehaviour
     public float dashCooldownTime;
     public bool IsStunned;
     public bool IsAttacking;
+    public AudioClip DashSound;
 
     private Rigidbody rb;
     private Collider playerCollider;
@@ -34,7 +35,7 @@ public class PlayerMovementsBehavior : MonoBehaviour
         innerWallLayerId = LayerMask.NameToLayer("InnerWalls");
         playerLayerId = LayerMask.NameToLayer("Players");
         pnjLayerId = LayerMask.NameToLayer("PNJ");
-        SetInnerLayerCollision(false);
+        IgnoreInnerWallsCollision(false);
         Physics.IgnoreLayerCollision(pnjLayerId, playerLayerId, true);
         dashCooldown = 0;
         dashAllowed = true;
@@ -82,29 +83,34 @@ public class PlayerMovementsBehavior : MonoBehaviour
             // Basic Movements
             rb.velocity = (Vector3.forward * speed * InputsManager.playerInputsDictionary[pid.PlayerId].LeftAnalogForwardAxis
                          + Vector3.right * speed * InputsManager.playerInputsDictionary[pid.PlayerId].LeftAnalogStrafeAxis) * Time.fixedDeltaTime;
-        }
+
+    }
         else if (IsDashing)
         {
             if (dashTime == startDashTime) // Give impulse
             {
-                SetInnerLayerCollision(true);
+                IgnoreInnerWallsCollision(true);
 
-                rb.velocity = ((Vector3.forward * InputsManager.playerInputsDictionary[pid.PlayerId].LeftAnalogForwardAxis
-                         + Vector3.right * InputsManager.playerInputsDictionary[pid.PlayerId].LeftAnalogStrafeAxis).normalized * dashSpeed
+    rb.velocity = ((Vector3.forward* InputsManager.playerInputsDictionary[pid.PlayerId].LeftAnalogForwardAxis
+                         + Vector3.right* InputsManager.playerInputsDictionary[pid.PlayerId].LeftAnalogStrafeAxis).normalized* dashSpeed
                          * Time.fixedDeltaTime);
                 dashAllowed = false;
             }
             else if (dashTime <= 0) // Dash is Over
             {
                 IsDashing = false;
-                SetInnerLayerCollision(false);
-                dashTime = startDashTime;
+                IgnoreInnerWallsCollision(false);
+dashTime = startDashTime;
                 dashCooldown = dashCooldownTime;
                 return;
             }
 
             dashTime -= Time.fixedDeltaTime;
         }
+        
+        // Face correct direction
+        //transform.forward = (transform.position + rb.velocity);
+        //transform.LookAt(transform.Find("Head").gameObject.GetComponent<Rigidbody>().+ rb.velocity);
     }
 
     public void StunForSeconds(float seconds)
@@ -118,7 +124,7 @@ public class PlayerMovementsBehavior : MonoBehaviour
         IsStunned = false;
     }
 
-    private void SetInnerLayerCollision(bool b)
+    private void IgnoreInnerWallsCollision(bool b)
     {
         if (PLAYERMOVEMENT_DEBUG)
             Debug.Log("Turning " + (b ? "On" : "Off")+ "innerWalls collisions");

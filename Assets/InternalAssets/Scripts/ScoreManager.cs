@@ -20,6 +20,8 @@ public class ScoreManager : MonoBehaviour
     {
         VictoryScore = victoryScoreEditorVariable;
         sliderValuePerSoul = 1.0f / VictoryScore;
+        for (int i = 0; i < 3; ++i)
+            playerScores.Add(i, 0); // HACK
     }
 
     public static void RegisterPlayer(int m_playerId)
