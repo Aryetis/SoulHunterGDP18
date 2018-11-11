@@ -8,7 +8,7 @@ public class SplashManager : MonoBehaviour
 	// Use this for initialization
 	void Start ()
     {
-        SceneLoader.StaticLoadScene("MainMenu");
+        SceneLoader.StaticLoadScene("Menus");
 	}
 	
 	// Update is called once per frame
