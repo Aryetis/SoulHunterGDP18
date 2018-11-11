@@ -11,7 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/InternalAssets/Scenes/SplashScreenScene.unity
     guid: 30c2580ab3960fa43a98af9db902bbbf
-  - enabled: 1
+  - enabled: 0
     path: Assets/InternalAssets/Scenes/MainMenu.unity
     guid: efde9b147e4a34d4f98f08d4b9c86cd9
   - enabled: 1
@@ -26,4 +26,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/InternalAssets/Scenes/Level1_Blender.unity
     guid: 28455081fcacb4cffb466c065c6b2f4c
+  - enabled: 1
+    path: Assets/InternalAssets/Scenes/IntroMenu.unity
+    guid: d8f6654ffe3234c759e9c65965739a4f
+  - enabled: 1
+    path: Assets/InternalAssets/Scenes/MenuRegles.unity
+    guid: 7a292e3e97d394f34bd4f0f8ce9e9f85
   m_configObjects: {}
