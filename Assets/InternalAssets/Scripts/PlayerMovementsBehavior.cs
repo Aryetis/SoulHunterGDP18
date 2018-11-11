@@ -107,8 +107,7 @@ dashTime = startDashTime;
 
             dashTime -= Time.fixedDeltaTime;
         }
-
-
+        
         // Face correct direction
         //transform.forward = (transform.position + rb.velocity);
         //transform.LookAt(transform.Find("Head").gameObject.GetComponent<Rigidbody>().+ rb.velocity);
