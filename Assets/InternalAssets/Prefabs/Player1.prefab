@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 33855055167743800}
   - component: {fileID: 23821585848669282}
   - component: {fileID: 135382134391554358}
+  - component: {fileID: 114647758350163978}
   m_Layer: 0
   m_Name: DeathSphere
   m_TagString: Untagged
@@ -46,7 +47,7 @@ GameObject:
   - component: {fileID: 114493077215950164}
   m_Layer: 0
   m_Name: Player1
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -58,7 +59,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1899761864270234}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.7618084, y: -4.27699, z: 5.4239664}
+  m_LocalPosition: {x: 0, y: 1, z: 15}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4481705100283858}
@@ -188,12 +189,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ec5687bc5ea3b143bbffc61f611aaee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerNum: 0
-  score: 0
   gatheredSouls: 0
   isStunned: 0
-  stunTimeLeft: 0
   stunTime: 0
+--- !u!114 &114647758350163978
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1420962873608248}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 847bdbbdf33b09240890a6ea53c3494c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114958728883567962
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -210,6 +219,7 @@ MonoBehaviour:
   startDashTime: 0.05
   dashCooldownTime: 0.8
   IsStunned: 0
+  IsAttacking: 0
 --- !u!114 &114977510256919618
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -74,6 +74,7 @@ public class InputTable
     public bool PausePressed;
     public bool AttackSphereDown;
     public bool AttackSpherePressed;
+    public bool AttackSphereReleased;
 
     private InControl.InputDevice inControlDevice;
 
@@ -108,6 +109,7 @@ public class InputTable
 
             AttackSphereDown = (inControlDevice.GetControl(InControl.InputControlType.LeftBumper).IsPressed);
             AttackSpherePressed = (inControlDevice.GetControl(InControl.InputControlType.LeftBumper).WasPressed);
+            AttackSphereReleased = (inControlDevice.GetControl(InControl.InputControlType.LeftBumper).WasReleased);
 
             if (INPUTS_TABLE_DEBUG)
             {

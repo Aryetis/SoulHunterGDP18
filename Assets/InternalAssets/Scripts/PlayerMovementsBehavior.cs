@@ -9,6 +9,7 @@ public class PlayerMovementsBehavior : MonoBehaviour
     public float startDashTime;
     public float dashCooldownTime;
     public bool IsStunned;
+    public bool IsAttacking;
 
     private Rigidbody rb;
     private Collider playerCollider;
@@ -40,7 +41,7 @@ public class PlayerMovementsBehavior : MonoBehaviour
         Debug.Log("dashTime : " + dashTime);
         Debug.Log("dashCooldown : " + dashCooldown);
 
-        if (!dashAllowed)
+        if (!dashAllowed || IsStunned || IsAttacking )
         {
             dashCooldown -= Time.fixedDeltaTime;
             if (dashCooldown <= 0)
@@ -84,6 +85,17 @@ public class PlayerMovementsBehavior : MonoBehaviour
 
             dashTime -= Time.fixedDeltaTime;
         }
+    }
+
+    public void StunForSeconds(float seconds)
+    {
+        IsStunned = true;
+        Invoke("UnStun", seconds);
+    }
+
+    private void UnStun()
+    {
+        IsStunned = false;
     }
 }
 
