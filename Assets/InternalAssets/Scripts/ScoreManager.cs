@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class ScoreManager : MonoBehaviour
 {
-    [SerializeField]
-    private int victoryScoreEditorVariable;
+    public int victoryScoreEditorVariable;
 
-    static public int VictoryScore;
-    static public Dictionary<int, int> playerScores;
+    public static int VictoryScore;
+    public static Dictionary<int, int> playerScores;
+    private static float sliderValuePerSoul; 
 
     private void Awake()
     {
@@ -19,6 +19,7 @@ public class ScoreManager : MonoBehaviour
     void Start ()
     {
         VictoryScore = victoryScoreEditorVariable;
+        sliderValuePerSoul = 1.0f / VictoryScore;
     }
 
     public static void RegisterPlayer(int m_playerId)
@@ -32,11 +33,11 @@ public class ScoreManager : MonoBehaviour
         return playerScores[m_playerId];
     }
 
-    public static void ChangePlayerScoreBy(int m_playerId, int value)
+    public static void ChangePlayerScoreBy(int m_playerId, int numberOfSoul)
     {
-        playerScores[m_playerId] += value;
-        HudManager.IncrementScoreSliderValue(m_playerId, value);
-        if (playerScores[m_playerId] > VictoryScore)
+        playerScores[m_playerId] += numberOfSoul;
+        HudManager.IncrementScoreSliderValue(m_playerId, sliderValuePerSoul * numberOfSoul);
+        if (playerScores[m_playerId] >= VictoryScore)
         {
             Time.timeScale = 0.0f;
             Debug.Log("WIN SCREEN, win for Player "+m_playerId+1);

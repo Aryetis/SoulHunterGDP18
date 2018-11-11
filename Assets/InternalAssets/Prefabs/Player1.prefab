@@ -190,8 +190,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gatheredSouls: 0
-  isStunned: 0
-  stunTime: 0
+  maxSphereLoadingTime: 2
+  soul: {fileID: 1591927739452934, guid: d67a67a4b60e58340947a8e476acc5bf, type: 2}
 --- !u!114 &114647758350163978
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -203,6 +203,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 847bdbbdf33b09240890a6ea53c3494c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  stunTime: 0
 --- !u!114 &114958728883567962
 MonoBehaviour:
   m_ObjectHideFlags: 1

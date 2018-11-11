@@ -140,7 +140,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &71632002
 MonoBehaviour:
@@ -182,7 +182,7 @@ GameObject:
   - component: {fileID: 97292916}
   - component: {fileID: 97292917}
   m_Layer: 0
-  m_Name: 'PlayersYellowCountSoul '
+  m_Name: PlayersYellowCountSoul
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -367,7 +367,7 @@ RectTransform:
   - {fileID: 97292916}
   - {fileID: 767079319}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: -17.283, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -705,7 +705,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400006, guid: 298194990fc8f4259bdde699b64f9aac, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 100006, guid: 298194990fc8f4259bdde699b64f9aac, type: 3}
       propertyPath: m_Name
@@ -994,6 +994,46 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.02, y: 0.019999998, z: 0.019999996}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &529703285
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 529703287}
+  - component: {fileID: 529703286}
+  m_Layer: 0
+  m_Name: HUDManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &529703286
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 529703285}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0a95251ae3ec4162a05f5494dfacd6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &529703287
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 529703285}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.9596581, y: 0.68454266, z: -1.4754086}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &536480996 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 100024, guid: 298194990fc8f4259bdde699b64f9aac,
@@ -1160,7 +1200,7 @@ Transform:
   - {fileID: 1713736979}
   - {fileID: 1111063747}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &657852408 stripped
 GameObject:
@@ -2196,7 +2236,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1408036148
 MonoBehaviour:
@@ -2209,7 +2249,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: faa6125065e13bb4c904f70e426341ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  victoryScoreEditorVariable: 0
+  victoryScoreEditorVariable: 10
 --- !u!1 &1434890697
 GameObject:
   m_ObjectHideFlags: 0
@@ -2239,7 +2279,7 @@ Transform:
   - {fileID: 243068214}
   - {fileID: 293080405}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1550541783 stripped
 GameObject:
@@ -2285,7 +2325,7 @@ GameObject:
   - component: {fileID: 1573020818}
   - component: {fileID: 1573020819}
   m_Layer: 0
-  m_Name: 'PlayersRedCountSoul '
+  m_Name: PlayersRedCountSoul
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2819,7 +2859,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
 --- !u!1 &2047056868
 GameObject:
@@ -3016,5 +3056,5 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 74.767006, y: 0, z: 0}

@@ -7,8 +7,6 @@ public class PNJBehavior : MonoBehaviour
 {
     [SerializeField]
     private float targetTime = 3f;
-    [SerializeField]
-    private GameObject soul;
 
     private Vector3 positionDestination;
     private NavMeshAgent agent;
@@ -20,6 +18,7 @@ public class PNJBehavior : MonoBehaviour
     private Vector3 player3Position;
     private Vector3 positionPNJ;
     private Rigidbody rb;
+    private bool PNJ_BEHAVIOR_DEBUG = false;
 
     // Use this for initialization
     void Start()
@@ -86,12 +85,13 @@ public class PNJBehavior : MonoBehaviour
             NavMeshHit hit2;
             if (!NavMesh.SamplePosition(positionDestination, out hit2, 1.0f, NavMesh.AllAreas))
             {
-                Debug.Log("IMPOSSIBLE D'EVITER LE CONFLIT");
+                if (PNJ_BEHAVIOR_DEBUG)
+                    Debug.Log("IMPOSSIBLE D'EVITER LE CONFLIT");
                 positionDestination = getPointRandomValide();
             }
             else
             {   // évite l'éventuel conflit (ne fait rien si pas de confilt)
-                bool ok = NavMesh.SamplePosition(positionDestination, out hit2, 1.0f, NavMesh.AllAreas);
+                NavMesh.SamplePosition(positionDestination, out hit2, 1.0f, NavMesh.AllAreas);
                 positionDestination = hit2.position;
             }
         }
@@ -99,7 +99,8 @@ public class PNJBehavior : MonoBehaviour
         //Debug.Log("Distance :" + Vector3.Distance(positionDestination, positionPNJ));
         if (Vector3.Distance(positionDestination, positionPNJ) < 2)
         {
-            Debug.Log("Changement de point !");
+            if (PNJ_BEHAVIOR_DEBUG)
+                Debug.Log("Changement de point !");
             positionDestination = getPointRandomValide();
         }
         agent.SetDestination(positionDestination);
@@ -132,11 +133,5 @@ public class PNJBehavior : MonoBehaviour
         }
 
         return pointRandom;
-    }
-
-    private void OnDestroy()
-    {
-        soul.transform.position = transform.position;
-        Instantiate(soul);
     }
 }
