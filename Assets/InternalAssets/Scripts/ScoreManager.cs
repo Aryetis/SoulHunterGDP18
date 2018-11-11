@@ -39,8 +39,9 @@ public class ScoreManager : MonoBehaviour
         HudManager.IncrementScoreSliderValue(m_playerId, sliderValuePerSoul * numberOfSoul);
         if (playerScores[m_playerId] >= VictoryScore)
         {
-            Time.timeScale = 0.0f;
-            Debug.Log("WIN SCREEN, win for Player "+m_playerId+1);
+            SceneLoader.StaticLoadScene("Victory");
+            //Time.timeScale = 0.0f;
+            //Debug.Log("WIN SCREEN, win for Player "+m_playerId+1);
         }
     }
 
