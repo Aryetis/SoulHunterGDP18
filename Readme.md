@@ -1,4 +1,4 @@
-# Game jam developped for GameDevParty14
+# Phase Terminale / Soul Hunter
 
 Multiplayer game, Top down 3 players controllers required ! (you can play with fewer players by pressing the "Space" key during the "Controller Attribution" / "Press Start" scene)
 
