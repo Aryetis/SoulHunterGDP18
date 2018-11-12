@@ -7,6 +7,7 @@ public class ReaperBehavior : MonoBehaviour
     public int gatheredSouls; // must be public as it's modified by BaseBehavior
     public float maxSphereLoadingTime = 2f;
     public GameObject soul;
+    public AudioClip sphereReleaseSfx;
 
     private float sphereLoadingTime;
     private float maxSphereDeathCooldownTime;
@@ -57,6 +58,8 @@ public class ReaperBehavior : MonoBehaviour
                 // Releasing the attack
                 if (!InputsManager.playerInputsDictionary[pid.PlayerId].AttackSphereDown || sphereLoadingTime >= maxSphereLoadingTime)
                 {
+                    // Play Sfx
+
                     //getting PNJs in the death sphere area before killing them
                     Collider[] sphereDeathCollider = Physics.OverlapSphere(transform.position, deathSphere.GetComponent<SphereCollider>().radius * deathSphere.transform.localScale.x);
                     for (int i = 0; i < sphereDeathCollider.Length; ++i)
