@@ -41,18 +41,21 @@ public class ControllerAttributionManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(CONTROLLERATTRIBUTIONMANAGER_DEBUG && Input.GetKey(KeyCode.Space))
+        if (CONTROLLERATTRIBUTIONMANAGER_DEBUG && Input.GetKey(KeyCode.Space))
+        {
+            Destroy(GameObject.Find("MainMenuMusic"));
             SceneLoader.StaticLoadScene("Level1_Blender");
+        }
 
         for (int i = 0 ; i < InputManager.Devices.Count; ++i)
         {
             if (InputManager.Devices[i].CommandIsPressed)
             {
-                if (currentPlayerAttribution <= 2 ) // still mapping controllers
+                if (currentPlayerAttribution <= 2) // still mapping controllers
                 {
                     if (!InputsManager.IsControllerIdUsed(i))
                     {
-Debug.Log("setting controller number : " + i);
+                        Debug.Log("setting controller number : " + i);
                         if (!InputsManager.playerInputsDictionary.ContainsKey(currentPlayerAttribution))
                             InputsManager.playerInputsDictionary[currentPlayerAttribution] = new InputTable();
                         InputsManager.playerInputsDictionary[currentPlayerAttribution].SetControllerId(i);
@@ -64,7 +67,10 @@ Debug.Log("setting controller number : " + i);
                     }
                 }
                 else
+                {
+                    Destroy(GameObject.Find("MainMenuMusic"));
                     SceneLoader.StaticLoadScene("Level1_Blender");
+                }
             }
         }
     }
