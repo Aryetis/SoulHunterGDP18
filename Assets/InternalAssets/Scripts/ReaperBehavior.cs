@@ -10,6 +10,7 @@ public class ReaperBehavior : MonoBehaviour
     public float maxSphereLoadingTime = 2f;
     public GameObject soul;
     public AudioClip sphereReleaseSfx;
+    public AudioClip sphereLoadingSfx;
     public PostProcessingProfile mainCameraPostProcess;
     public float maxVignetteEffect;
 
@@ -76,6 +77,10 @@ public class ReaperBehavior : MonoBehaviour
                 && sphereLoadingTime < maxSphereLoadingTime
                 && !pmb.IsAttacking)
             {
+                // Play Sfx
+                audioSource.clip = sphereLoadingSfx;
+                audioSource.Play();
+                
                 ++sphereCastingCounter;
                 deathSphere.SetActive(true);
                 pmb.IsAttacking = true; // pin down player while attacking (in PlayerMovementsBehavior.cs)

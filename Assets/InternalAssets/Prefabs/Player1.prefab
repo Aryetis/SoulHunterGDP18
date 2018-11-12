@@ -392,6 +392,7 @@ MonoBehaviour:
   maxSphereLoadingTime: 2
   soul: {fileID: 1591927739452934, guid: d67a67a4b60e58340947a8e476acc5bf, type: 2}
   sphereReleaseSfx: {fileID: 8300000, guid: ad61e04911f37b24baf1ae28658f0fc5, type: 3}
+  sphereLoadingSfx: {fileID: 8300000, guid: 06fd42ccefae5584b9fa7b58c227630f, type: 3}
   mainCameraPostProcess: {fileID: 11400000, guid: 8435f611c68690b478ef52c6aa1b08a4,
     type: 2}
   maxVignetteEffect: 0.55
