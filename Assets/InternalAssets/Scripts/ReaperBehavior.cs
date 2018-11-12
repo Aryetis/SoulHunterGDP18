@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.PostProcessing;
 
 [RequireComponent(typeof(AudioSource))]
 public class ReaperBehavior : MonoBehaviour
@@ -9,6 +10,8 @@ public class ReaperBehavior : MonoBehaviour
     public float maxSphereLoadingTime = 2f;
     public GameObject soul;
     public AudioClip sphereReleaseSfx;
+    public PostProcessingProfile mainCameraPostProcess;
+    public float maxVignetteEffect;
 
     private float sphereLoadingTime;
     private float maxSphereDeathCooldownTime;
@@ -17,6 +20,10 @@ public class ReaperBehavior : MonoBehaviour
     private Vector3 initalDeathSphereScale;
     private PlayerMovementsBehavior pmb;
     private PlayerIdDistributor pid;
+    private AudioSource audioSource;
+    private VignetteModel.Settings vignetteSettings;
+    private static float vignetteEffectVal;
+    private static int sphereCastingCounter;
 
     // Use this for initialization
     void Start()
@@ -32,11 +39,35 @@ public class ReaperBehavior : MonoBehaviour
         deathSphere = transform.Find("DeathSphere").gameObject;
         deathSphere.SetActive(false);
         initalDeathSphereScale = deathSphere.transform.localScale;
+        audioSource = GetComponent<AudioSource>();
+        vignetteSettings = mainCameraPostProcess.vignette.settings;
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (sphereCastingCounter > 0)
+        {
+            if (pmb.IsAttacking)
+            {
+                // Get max vignette effect value across all players
+                float val = 0.0f;
+                val = 0.35f + (sphereLoadingTime / maxSphereLoadingTime) * (maxVignetteEffect- 0.35f);
+                if (val > vignetteEffectVal)
+                    vignetteEffectVal = val;
+
+                // Charge vigette effect
+                vignetteSettings.intensity = vignetteEffectVal;
+                mainCameraPostProcess.vignette.settings = vignetteSettings;
+            }
+        }
+        else
+        {
+            vignetteEffectVal = 0.0f;
+            vignetteSettings.intensity = vignetteEffectVal;
+            mainCameraPostProcess.vignette.settings = vignetteSettings;
+        }
+
         if (!pmb.IsStunned)
         {
             // About to Attack
@@ -45,6 +76,7 @@ public class ReaperBehavior : MonoBehaviour
                 && sphereLoadingTime < maxSphereLoadingTime
                 && !pmb.IsAttacking)
             {
+                ++sphereCastingCounter;
                 deathSphere.SetActive(true);
                 pmb.IsAttacking = true; // pin down player while attacking (in PlayerMovementsBehavior.cs)
                 deathSphere.transform.localScale += new Vector3(deathSphere.transform.localScale.x, deathSphere.transform.localScale.y, deathSphere.transform.localScale.z) * Time.deltaTime;
@@ -59,7 +91,11 @@ public class ReaperBehavior : MonoBehaviour
                 // Releasing the attack
                 if (!InputsManager.playerInputsDictionary[pid.PlayerId].AttackSphereDown || sphereLoadingTime >= maxSphereLoadingTime)
                 {
+                    --sphereCastingCounter;
+
                     // Play Sfx
+                    audioSource.clip = sphereReleaseSfx;
+                    audioSource.Play();
 
                     //getting PNJs in the death sphere area before killing them
                     Collider[] sphereDeathCollider = Physics.OverlapSphere(transform.position, deathSphere.GetComponent<SphereCollider>().radius * deathSphere.transform.localScale.x);

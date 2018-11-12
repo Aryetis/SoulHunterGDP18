@@ -2622,11 +2622,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 114221021768167374, guid: 4f3d730752b9b084187078f190a8ea6a,
-        type: 2}
-      propertyPath: sphereReleaseSfx
-      value: 
-      objectReference: {fileID: 8300000, guid: ad61e04911f37b24baf1ae28658f0fc5, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4f3d730752b9b084187078f190a8ea6a, type: 2}
   m_IsPrefabAsset: 0

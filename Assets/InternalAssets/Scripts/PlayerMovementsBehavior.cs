@@ -11,9 +11,8 @@ public class PlayerMovementsBehavior : MonoBehaviour
     public float dashCooldownTime;
     public bool IsStunned;
     public bool IsAttacking;
-    AudioSource audioSource;
-    AudioClip dashSfx;
-
+    public AudioClip dashSfx;
+    
     private Rigidbody rb;
     private float dashTime;
     private bool IsDashing;
@@ -24,6 +23,7 @@ public class PlayerMovementsBehavior : MonoBehaviour
     private int pnjLayerId;
     private int playerLayerId;
     private bool PLAYERMOVEMENT_DEBUG = false;
+    private AudioSource audioSource;
 
     // Use this for initialization
     void Start()
@@ -76,6 +76,7 @@ public class PlayerMovementsBehavior : MonoBehaviour
         if (InputsManager.playerInputsDictionary[pid.PlayerId].DashPressed && dashTime == startDashTime && dashAllowed)
         {
             IsDashing = true;
+            audioSource.clip = dashSfx;
             audioSource.Play();
         }
 

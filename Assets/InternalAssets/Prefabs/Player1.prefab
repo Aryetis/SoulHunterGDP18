@@ -291,7 +291,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: cc4f27440f2d9a141b07d9bc4fd5af8a, type: 3}
+  m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -391,6 +391,10 @@ MonoBehaviour:
   gatheredSouls: 0
   maxSphereLoadingTime: 2
   soul: {fileID: 1591927739452934, guid: d67a67a4b60e58340947a8e476acc5bf, type: 2}
+  sphereReleaseSfx: {fileID: 8300000, guid: ad61e04911f37b24baf1ae28658f0fc5, type: 3}
+  mainCameraPostProcess: {fileID: 11400000, guid: 8435f611c68690b478ef52c6aa1b08a4,
+    type: 2}
+  maxVignetteEffect: 0.55
 --- !u!114 &114258880488600578
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -420,6 +424,7 @@ MonoBehaviour:
   dashCooldownTime: 0.8
   IsStunned: 0
   IsAttacking: 0
+  dashSfx: {fileID: 8300000, guid: cc4f27440f2d9a141b07d9bc4fd5af8a, type: 3}
 --- !u!114 &114874025991023188
 MonoBehaviour:
   m_ObjectHideFlags: 1
