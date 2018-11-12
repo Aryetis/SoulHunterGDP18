@@ -10,7 +10,8 @@ public class MainMenuManager : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        DontDestroyOnLoad(GameObject.Find("MainMenuMusic"));
+        if (GameObject.Find("MainMenuMusic") != null)
+            DontDestroyOnLoad(GameObject.Find("MainMenuMusic"));
 
         if (MAIN_MENU_DEBUG)
             SceneLoader.StaticLoadScene("ControllerSelectionScene");
