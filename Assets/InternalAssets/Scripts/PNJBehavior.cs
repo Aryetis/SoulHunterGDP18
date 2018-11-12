@@ -10,7 +10,7 @@ public class PNJBehavior : MonoBehaviour
     [SerializeField]
     private GameObject soul;
 
-    private static bool PNJBehavior_DEBUG = false;
+    //private static bool PNJBehavior_D   EBUG = false;
 
     private Vector3 positionDestination;
     private NavMeshAgent agent;
@@ -57,16 +57,12 @@ public class PNJBehavior : MonoBehaviour
                     {
                         agent.SetDestination(getPointRandomValide(-20f, 0f, 4f, 17f));
                         targetTime = 1f;
-                        if (PNJBehavior_DEBUG)
-                            Debug.Log("HAUT");
                         return;
                     }
                     else
                     {
                         agent.SetDestination(getPointRandomValide(-20f, -1f, -10f, 3f));
                         targetTime = 1f;
-                        if (PNJBehavior_DEBUG)
-                            Debug.Log("BAS");
                         return;
                     }
                     
@@ -77,35 +73,20 @@ public class PNJBehavior : MonoBehaviour
                     {
                         agent.SetDestination(getPointRandomValide(3f, 20f, 4f, 17f));
                         targetTime = 1f;
-                        if (PNJBehavior_DEBUG)
-                            Debug.Log("HAUT");
                         return;
                     }
                     else
                     {
                         agent.SetDestination(getPointRandomValide(3f, 20f, -10f, 3f));
                         targetTime = 1f;
-                        if (PNJBehavior_DEBUG)
-                            Debug.Log("BAS");
                         return;
                     }
                 }
-                if (PNJBehavior_DEBUG)
-                    Debug.Log("CA MARCHE");
-                // x gauche : -20 -2   droite : 2 20
-                return;
-            }
-            else
-            {
-                if (PNJBehavior_DEBUG)
-                    Debug.Log("BIENTOT");
             }
             targetTime -= Time.deltaTime;
         }
         else
         {
-            if (PNJBehavior_DEBUG)
-                Debug.Log("TROP VITE");
             targetTime = 1f;
         }
 
@@ -138,13 +119,11 @@ public class PNJBehavior : MonoBehaviour
             NavMeshHit hit2;
             if (!NavMesh.SamplePosition(positionDestination, out hit2, 1.0f, NavMesh.AllAreas))
             {
-                if (PNJBehavior_DEBUG)
-                    Debug.Log("IMPOSSIBLE D'EVITER LE CONFLIT");
                 positionDestination = getPointRandomValide(-20f, 20f, -10f, 17f);
             }
             else
             {   // évite l'éventuel conflit (ne fait rien si pas de confilt)
-                bool ok = NavMesh.SamplePosition(positionDestination, out hit2, 1.0f, NavMesh.AllAreas);
+                NavMesh.SamplePosition(positionDestination, out hit2, 1.0f, NavMesh.AllAreas);
                 positionDestination = hit2.position;
             }
         }
@@ -152,8 +131,6 @@ public class PNJBehavior : MonoBehaviour
         //Debug.Log("Distance :" + Vector3.Distance(positionDestination, positionPNJ));
         if (Vector3.Distance(positionDestination, positionPNJ) < 2)
         {
-            if (PNJBehavior_DEBUG)
-                Debug.Log("Changement de point !");
             positionDestination = getPointRandomValide(-20f, 20f, -10f, 17f);
         }
         agent.SetDestination(positionDestination);

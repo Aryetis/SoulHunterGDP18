@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(AudioSource))]
 public class ReaperBehavior : MonoBehaviour
 {
     public int gatheredSouls; // must be public as it's modified by BaseBehavior

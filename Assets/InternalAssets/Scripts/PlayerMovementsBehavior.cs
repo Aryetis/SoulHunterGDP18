@@ -12,9 +12,9 @@ public class PlayerMovementsBehavior : MonoBehaviour
     public bool IsStunned;
     public bool IsAttacking;
     AudioSource audioSource;
+    AudioClip dashSfx;
 
     private Rigidbody rb;
-    private Collider playerCollider;
     private float dashTime;
     private bool IsDashing;
     private float dashCooldown;
@@ -29,7 +29,6 @@ public class PlayerMovementsBehavior : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        playerCollider = GetComponentInChildren<Collider>();
         dashTime = startDashTime;
         IsDashing = false;
         rb.velocity = Vector3.zero;

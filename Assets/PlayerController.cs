@@ -13,7 +13,7 @@ public class PlayerController : MonoBehaviour
         var inputDevice = InputManager.ActiveDevice;
 
 		float x = inputDevice.RightStickX * Time.deltaTime * 150.0f;
-		float y = 0;
+		//float y = 0;
 		float z = inputDevice.LeftStickY * Time.deltaTime * 3.0f;
 
 
